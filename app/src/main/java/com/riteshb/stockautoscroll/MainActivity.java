@@ -11,6 +11,9 @@ public class MainActivity extends AppCompatActivity {
 
     final int duration = 10;
     final int pixelsToMove = 30;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    HeaderAdapter madapter;
+    private RecyclerView rv_autoScroll;
     private final Runnable SCROLLING_RUNNABLE = new Runnable() {
 
         @Override
@@ -19,10 +22,6 @@ public class MainActivity extends AppCompatActivity {
             mHandler.postDelayed(this, duration);
         }
     };
-
-    private final Handler mHandler = new Handler(Looper.getMainLooper());
-    private RecyclerView rv_autoScroll;
-    HeaderAdapter madapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +43,21 @@ public class MainActivity extends AppCompatActivity {
                 super.onScrolled(recyclerView, dx, dy);
                 int lastItem = layoutManager.findLastCompletelyVisibleItemPosition();
                 if(lastItem == layoutManager.getItemCount()-1){
-                    rv_autoScroll.setAdapter(null);
-                    rv_autoScroll.setAdapter(madapter);
+                    mHandler.removeCallbacks(SCROLLING_RUNNABLE);
+                    Handler postHandler = new Handler();
+                    postHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            rv_autoScroll.setAdapter(null);
+                            rv_autoScroll.setAdapter(madapter);
+                            mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
+                        }
+                    }, 2000);
+
                 }
 
             }
         });
-        mHandler.post(SCROLLING_RUNNABLE);
+        mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
     }
 }
