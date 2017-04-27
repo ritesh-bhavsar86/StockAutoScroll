@@ -53,9 +53,7 @@ public class MainActivity extends AppCompatActivity {
                             mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
                         }
                     }, 2000);
-
                 }
-
             }
         });
         mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
