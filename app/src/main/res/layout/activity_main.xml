@@ -12,6 +12,27 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:clipToPadding="false"
+        android:visibility="visible"
         />
+
+    <com.riteshb.stockautoscroll.ScrollTextView
+        android:id="@+id/tvContent"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:maxLines="3"
+        android:scrollHorizontally="false"
+        android:scrollbars="vertical"
+        android:text="@string/app_txt"
+        android:textAlignment="inherit"
+        android:textColor="@android:color/black"
+        android:textSize="12dp" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="increase" />
 
 </LinearLayout>
